@@ -1,0 +1,19 @@
+[Unit]
+Description=ATX-LED Updater
+After=multi-user.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+Restart=no
+
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/atxled/releases
+EnvironmentFile=-/home/pi/atxled/urls.env
+ExecStartPre=/home/pi/atxled/backup-update.sh
+ExecStart=/home/pi/atxled/releases/update.sh
+
+[Install]
+WantedBy=multi-user.target
